@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  gmp:
+    build:
+      context: ./gmp
+    volumes:
+      - ./gmp:/home/software/gmp:rw
+    command: mvn pax:provision
+    ports:
+      - 61616:61616
+    expose: [61616]
+  giapi-glue-ext:
+    build:
+      context: ./giapi-glue-cc-external/
+    image: giapi-glue/external:15
+    volumes:
+      - ./giapi-glue-cc/external:/home/software/giapi-glue-cc/external
+
+  giapi-glue-lib:
+    build:
+      context: ./giapi-glue-cc
+    image: giapi-glue-build:15
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./giapi-glue-cc:/home/software/giapi-glue-cc
+    depends_on: [giapi-glue-ext] 
+    links:
+      - gmp
+
+
+
