@@ -1,0 +1,21 @@
+### BUILD FROM DOCKER-COMPOSE ####
+
+1. Clone both repos with Dockerfiles. A copy of each Dockerfile is in this repo
+   so it can be crosschecked 
+
+   $ git clone https://github.com/gemini-hlsw/gmp.git # branch dockerize15.0.7
+   $ git clone https://github.com/gemini-hlsw/giapi-glue-cc.git # branch dockerize
+
+2. Build images 
+   
+   $ docker-compose build
+
+3. Run container with glue 
+
+   $ docker-compose run giapi-glue-lib 
+
+4. (Optional) To see gmp log in another terminal:
+   
+   $ docker logs scorpio_gmp_1 -f
+
+### BUILD FROM VANILLA DOCKER ###
