@@ -6,7 +6,7 @@ services:
       context: ./gmp
     volumes:
       - ./gmp:/home/software/gmp:rw
-    image: gmp:R15.0.6
+    image: gmp:mac
     command: mvn pax:provision
     ports:
       - 61616:61616
@@ -14,14 +14,14 @@ services:
   giapi-glue-ext:
     build:
       context: ./giapi-glue-cc/external/
-    image: giapi-glue-external:R15
+    image: giapi-glue-external:rocky8
     volumes:
       - ./giapi-glue-cc/external:/home/software/giapi-glue-cc/external
 
   giapi-glue-lib:
     build:
       context: ./giapi-glue-cc
-    image: giapi-glue-build:R15
+    image: giapi-glue-build:rocky8
     volumes:
       - ./giapi-glue-cc/src:/home/software/giapi-glue-cc/src
     depends_on: [gmp] 
